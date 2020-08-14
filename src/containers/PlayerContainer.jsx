@@ -3,6 +3,7 @@ import Controls from '../views/Controls'
 import { connect } from 'react-redux'; 
 import { toggleSongPlaying } from '../redux/modules/songs/songActionCreators';
 
+
 const mapStateToProps = state => ({
   currentSong : state.music.currentSong,
   songPlaying: state.music.songPlaying,
@@ -18,9 +19,8 @@ const PlayerContainer = ({ currentSong, songPlaying, toggleSongPlaying }) => {
 
   useEffect(() => {
     if (songPlaying) {
-      console.log('playing', songRef.current.src)
+      console.log(currentSong.songUrl)
     } else {
-      console.log('not playing', songRef.current.src)
     }
   }, [songPlaying]); 
 
@@ -30,7 +30,7 @@ const PlayerContainer = ({ currentSong, songPlaying, toggleSongPlaying }) => {
       <h2>{currentSong.artist}</h2>
       <h2>{currentSong.album},{currentSong.year}</h2>
       <h2>{currentSong.albumCover}</h2>
-      <audio src={currentSong.songUrl} ref={songRef}></audio>
+      <audio src={currentSong.songUrl} type='audio/mp3' crossOrigin='anonymous' ref={songRef}></audio>
       <Controls isPlaying={songPlaying} toggleSongPlaying={toggleSongPlaying} songId={currentSong.id}/>
     </div>
   )

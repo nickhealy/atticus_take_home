@@ -5,7 +5,7 @@ const initialState = {
   currentSong: {
     id: 1, 
     title: "Don't Stop Believing", 
-    songUrl: 'url/to/song',
+    songUrl: '/music/Journey - Don t Stop Believin .mp3',
     artist: "Journey", 
     year: "1985", 
     album: "Album Name", 
