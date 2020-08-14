@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'; 
-import Controls from '../views/Controls'
+import Controls from '../views/Controls'; 
+import ProgressBar from '../views/ProgressBar';
 import { connect } from 'react-redux'; 
 import { toggleSongPlaying } from '../redux/modules/songs/songActionCreators';
 
@@ -19,8 +20,12 @@ const PlayerContainer = ({ currentSong, songPlaying, toggleSongPlaying }) => {
 
   useEffect(() => {
     if (songPlaying) {
-      console.log(currentSong.songUrl)
+      // NOTE: I had trouble mocking how I would play mp3 file paths, so I am mocking playing a song
+      // in real life, I would do somehting like songRef.play(); 
+      songRef.current.play();
+
     } else {
+      songRef.current.pause();
     }
   }, [songPlaying]); 
 
@@ -31,6 +36,7 @@ const PlayerContainer = ({ currentSong, songPlaying, toggleSongPlaying }) => {
       <h2>{currentSong.album},{currentSong.year}</h2>
       <h2>{currentSong.albumCover}</h2>
       <audio src={currentSong.songUrl} type='audio/mp3' crossOrigin='anonymous' ref={songRef}></audio>
+      <ProgressBar duration={currentSong.duration} isPlaying={songPlaying}/>
       <Controls isPlaying={songPlaying} toggleSongPlaying={toggleSongPlaying} songId={currentSong.id}/>
     </div>
   )

@@ -4,11 +4,12 @@ const initialState = {
   songPlaying: false,
   currentSong: {
     id: 1, 
-    title: "Don't Stop Believing", 
-    songUrl: '/music/Journey - Don t Stop Believin .mp3',
-    artist: "Journey", 
-    year: "1985", 
-    album: "Album Name", 
+    songUrl: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/wwy.mp3',
+    title: "We Were Young",
+    artist: "Odesza",
+    album: "Summer's Gone",
+    year: 2012,
+    duration: 192,
     albumCover: 'path/to/album cover'
   },
   // THIS ARRAY WOULD COME FROM AN API CALL THAT WOULD OCCUR ON LOAD
