@@ -4,5 +4,6 @@ import { rootReducer } from './index';
 
 export const store = createStore(
   rootReducer, 
+  // to have access redux dev tools
   composeWithDevTools()
 ); 

@@ -16,10 +16,32 @@ const initialState = {
   availableSongs: [
     {
       id: 1, 
-      title: "Don't Stop Believing", 
-      artist: "Journey", 
-      year: "1985", 
-      album: "Album Name", 
+      songUrl: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/wwy.mp3',
+      title: "We Were Young",
+      artist: "Odesza",
+      album: "Summer's Gone",
+      year: 2012,
+      duration: 192,
+      albumCover: 'path/to/album cover'
+    }, 
+    {
+      id: 2, 
+      songUrl: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/wwy.mp3',
+      title: "The Next Song",
+      artist: "Amazing musician",
+      album: "Album #1",
+      year: 2012,
+      duration: 60,
+      albumCover: 'path/to/album cover'
+    },
+    {
+      id: 3, 
+      songUrl: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/wwy.mp3',
+      title: "Another Song",
+      artist: "Even better musician",
+      album: "Album #1",
+      year: 2012,
+      duration: 90,
       albumCover: 'path/to/album cover'
     }
   ]

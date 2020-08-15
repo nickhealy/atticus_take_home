@@ -2,5 +2,5 @@
 
 export const SELECT_SONG = 'SELECT_SONG'; 
 export const TOGGLE_SONG_PLAYING = 'TOGGLE_SONG_PLAYING'; 
-export const FAST_FORWARD = 'FAST_FORWARD'; 
-export const REWIND = 'REWIND';
+export const NEXT_SONG = 'NEXT_SONG'; 
+export const PREV_SONG = 'PREV_SONG'; 

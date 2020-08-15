@@ -16,12 +16,12 @@ const mapDispatchToProps = dispatch => ({
 
 // TO DO -- account for whether some data is incomplete (using conditional rendering)
 const PlayerContainer = ({ currentSong, songPlaying, toggleSongPlaying }) => { 
+  // store references to the audio element that will persist across renders
   const songRef = useRef(null); 
 
+  // this will play the audio element if the song is playing according to the store
   useEffect(() => {
     if (songPlaying) {
-      // NOTE: I had trouble mocking how I would play mp3 file paths, so I am mocking playing a song
-      // in real life, I would do somehting like songRef.play(); 
       songRef.current.play();
 
     } else {
@@ -31,9 +31,9 @@ const PlayerContainer = ({ currentSong, songPlaying, toggleSongPlaying }) => {
 
   return (
     <div id='player-container'>
-      <h3>{currentSong.title}</h3>
-      <h2>{currentSong.artist}</h2>
-      <h2>{currentSong.album},{currentSong.year}</h2>
+      <h3>Title : {currentSong.title ? currentSong.title : 'Unknown' }</h3>
+      <h2>Artist : {currentSong.artist ? currentSong.artist : 'Unknown'}</h2>
+      <h2>Album : {currentSong.album ? currentSong.album : 'Unknown'} , Year: {currentSong.year ? currentSong.year : 'Unknown'}</h2>
       <h2>{currentSong.albumCover}</h2>
       <audio src={currentSong.songUrl} type='audio/mp3' crossOrigin='anonymous' ref={songRef}></audio>
       <ProgressBar duration={currentSong.duration} isPlaying={songPlaying}/>
