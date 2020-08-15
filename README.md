@@ -1,68 +1,26 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Hi Sam, 
+Here is my assignment, as well as some of my overall thought process/future feature ideas. 
 
-## Available Scripts
+## Overall Approach: 
 
-In the project directory, you can run:
+I figured Redux would be a good choice to manage state in this application. While it may be overkill for the scale of the app you assigned me to do today, in theory this would be a much larger application in the future, where Redux would be a little more justified. Another alternative I thought of was using Context, but frankly I think that would have gotten a little bit out of control, given how much data this application would be using in the future.  
 
-### `npm start`
+I decided to keep the information of what the current song we are listening to is and whether that song is playing in the store, and leave the data about how far into the song we are in the local state of the ProgressBar component using Hooks. It did not seem important to me that, as the UI scales, all components have access to the progress of a song, so I left that in local state. 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+I did not have a chance to implement this, but I also planned on having information about song sequences (i.e. a current playlist or an album) in the store as well. You'll notice that I had an id key on every song. In an ideal world, I would get back from my API an array of the id's of the songs in a particular playlist or album, and cross-reference that with a list of the songs by id. That way, as soon as one song ends, a "NEXT_SONG" action would be dispatched to the store, which would update the currentSong field to be the song corresponding with the next id in the array from the API. There would also be a "PREVIOUS_SONG" action that would do the opposite. This seemed to me to be a good way to normalize my data, and is how I would imagine that information would be stored in a relational database. 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+The redux is also set up to have the user select a song from a list. The list, a mini dummy version of which I have put in the "availableSongs" field of the store, would be rendered as an array of React components, each showing that song's respective information and holding behind the scenes their id from the store. When you click on them, that would fire the "SELECT_SONG" action, passing in that element's respective id, and updating the store as I do in my reducer. This "availableSongs" array would be fetched when the component first mounts. 
 
-### `npm test`
+I think it is also worth mentioning that that initial fetch of songs/user-specific info would be dependent upon whatever authentication information is retrieved from the API. The songs that Person A sees would be different from the songs Person B sees. 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## What I did well 
+I made really good use of Hooks in the ProgressBar component (useState, useEffect, useRef, useCallback) to mimic certain class lifecycle methods and minimize unnecessary re-renders of certain functions. I also think I overall wrote really clean and generally well-commented code. I also think I set up a good file structure that would make it easy to scale the UI. I organized it by what (I think) is called the "redux ducks" method of organizing your Redux into modules that each have their own reducer, actions, and actionCreator files instead of having. For example, you could easily add a 'user' modules with a userActions, userActionCreators, and userReducer files. 
 
-### `npm run build`
+## Challenges, and How I Could Have Improved 
+The biggest technical challenge was, oddly enough, mocking the song. I initially tried to have mp3 files included in the bundle (you'll notice that I ran npm eject on my create-react-app so I could configure webpack), but I eventually abandoned that approach. I then realized this music would probably be stored on an AWS S3 bucket (or similar technology), so I scoured the internet for a S3 url pointing to an mp3. I found one, so only the song that is currently loaded will actually play. Unfortunately, figuring all this out did take some time. In retrospect, I probably could have focused on completing the song selection feature, and mocking actually playing an audio, but it seemed to me an important aspect of the MVP that the music player actual play some music. 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In retrospect, I also should have probably used redux-toolkit instead of setting up Redux by hand. The application seemed small enough that it wouldn't be a problem, but I did spend a little time typing boilerplate. 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Admittedly, I did not do as many features as I would have hoped in the alloted time. I also would have liked to spend slightly more time on styling, although I knew going into this project that styling was not a priority. It also goes without saying that I should have added a few unit tests, even if they were only testing reducer behavior. If I had not sunk time into the music problem, I likely would have been able to implement a few. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Anyway, I sincerely hope you see that, while the application is bare-bones, I was thinking very far down the road and trying to be as smart as possible with my approach. 
